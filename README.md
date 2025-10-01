@@ -105,13 +105,16 @@ Caso deseja reportar um erro, acesse [Issue](https://github.com/pedrohsoaresadv/
 Envie sua sugestão de nova funcionalidade em [https://seipro.changecrab.com/suggestions](https://seipro.changecrab.com/suggestions)
 Vote nas sugestões que mais queria ver no SEI Pro!
 
-## Grupo SEI Lab
+## SEI Pro no ParticiPEN
+
+Participe da Comunidade do Processo Eletrônico Nacional (ParticiPEN), espaço criado para compartilhar ideias, experiências e discussões técnicas.
+[https://participen.processoeletronico.gov.br/c/modulos-comunidade/sei-pro/39](https://participen.processoeletronico.gov.br/c/modulos-comunidade/sei-pro/39)
+
+## Comunidade SEI Lab
 
 Participe do laboratorio de ideias sobre inovações para o SEI, automações e boas práticas.
 
-> <img src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" data-canonical-src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" width="16"/> [http://bit.ly/SEI_Lab](http://bit.ly/SEI_Lab) (eventualmente cheio)
-> 
-> <img src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" data-canonical-src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" width="16"/> [http://bit.ly/SEI_Lab_2](https://bit.ly/SEI_Lab_2)
+> <img src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" data-canonical-src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" width="16"/> [https://bit.ly/Comunidade_SEI_Lab](https://bit.ly/Comunidade_SEI_Lab)
 
 
 ## Novidades e dicas

@@ -315,7 +315,7 @@ Alterações substanciais serão comunicadas através de:
 | Versão | Data | Principais Alterações |
 |--------|------|----------------------|
 | 2.0 | 14/01/2026 | Reformulação completa para adequação à LGPD; declaração explícita de não coleta de dados; detalhamento de integrações externas |
-| 1.0 | [Data anterior] | Versão inicial (modelo genérico) |
+| 1.0 | 02/08/2020 | Versão inicial (modelo genérico) |
 
 ---
 

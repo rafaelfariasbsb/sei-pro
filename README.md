@@ -131,3 +131,7 @@ Confira nosso [Histórico de versões](./pages/HISTORICO.md)
 
 AGPL-3.0
 
+## Política de Privacidade
+
+Confira nossa Declaração de Não Coleta de Dadosm em confomidade com a Lei nº 13.709/2018 (LGPD) e com as melhores práticas de segurança da informação: [Política de Privacidade](./PRIVACY_POLICY.md)
+

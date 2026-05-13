@@ -32,6 +32,26 @@ Bem-vindo à documentação técnica do SEI Pro. Esta pasta contém toda a docum
 | [Glossário](./glossario.md) | Definições de termos do domínio SEI e termos técnicos da extensão |
 | [Guia de Desenvolvimento](./desenvolvimento.md) | Como montar o ambiente, depurar e adicionar funcionalidades |
 
+### Módulos
+
+| Documento | Módulo |
+|---|---|
+| [Visão geral dos módulos](./modulos/README.md) | Índice + contextos de injeção |
+| [sei-functions-pro](./modulos/sei-functions-pro.md) | Núcleo compartilhado (~732 KB) |
+| [sei-pro](./modulos/sei-pro.md) | Página principal — lista de processos |
+| [sei-pro-editor](./modulos/sei-pro-editor.md) | Editor de documentos ❌ quebrado no SEI 5 |
+| [sei-pro-arvore](./modulos/sei-pro-arvore.md) | Árvore do processo |
+| [sei-pro-atividades](./modulos/sei-pro-atividades.md) | Controle de prazos (~2.1 MB) |
+| [sei-pro-ai](./modulos/sei-pro-ai.md) | Integração com IA / ChatGPT |
+
+### Planejamento
+
+| Documento | Descrição |
+|---|---|
+| [Roadmap](./roadmap.md) | Fases do projeto, entregas e critérios de versão |
+| [Especificação de Migração SEI 5](./especificacao-sei5.md) | O que mudou no SEI 5 e plano de adaptação por módulo |
+| [Padrões de Código](./padroes-codigo.md) | Convenções, boas práticas e padrões do projeto |
+
 ### Decisões Arquiteturais (ADR)
 
 | Documento | Decisão |

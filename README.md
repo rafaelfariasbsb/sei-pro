@@ -1,24 +1,34 @@
-# Bem vindo ao SEI Pro ![SEI Pro](/img/icon-32.png)
+# SEI Pro — Fork Comunitário ![SEI Pro](/img/icon-32.png)
 
-**SEI Pro!** adiciona ao [Sistema Eletrônico de Informações (SEI)](https://softwarepublico.gov.br/social/sei) diversas funções avançadas na página inicial e no editor de textos:
+> **Fork comunitário** do [SEI Pro original](https://github.com/SEI-Pro/sei-pro), mantido pela comunidade de usuários do SEI.
+> O projeto original está sem atualizações desde 2023. Este fork tem como objetivo principal a **compatibilidade com o SEI 5** e a continuidade das funcionalidades existentes.
 
-**Compatível com a versão 4.0 do SEI**
+**SEI Pro** adiciona ao [Sistema Eletrônico de Informações (SEI)](https://softwarepublico.gov.br/social/sei) diversas funções avançadas na página inicial e no editor de textos.
 
-## Como começar?
+| Versão do SEI | Status |
+|---|---|
+| SEI 4.0 / 4.1 | ✅ Compatível |
+| SEI 5.x | 🔧 Em adaptação |
 
-Instale a extensão para seu navegador preferido:
+## Como instalar
 
-<img src="https://edent.github.io/SuperTinyIcons/images/svg/chrome.svg" width="24" title="Chrome"> Google Chrome em:
+### Instalação manual (todas as versões do SEI)
 
-> [https://chrome.google.com/webstore/detail/sei-pro/pdbbapplhjopafpgidbgceccbbmehcjj](https://chrome.google.com/webstore/detail/sei-pro/pdbbapplhjopafpgidbgceccbbmehcjj)
+1. Baixe o arquivo ZIP da [última release](https://github.com/rafaelfariasbsb/sei-pro/releases/latest)
+2. Extraia o conteúdo
+3. No navegador:
+   - **Chrome / Edge:** acesse `chrome://extensions`, ative o **Modo do desenvolvedor** e clique em **Carregar sem compactação** → selecione a pasta `dist/`
+   - **Firefox:** acesse `about:debugging` → **Carregar extensão temporária** → selecione `dist/manifest.json`
 
-<img src="https://edent.github.io/SuperTinyIcons/images/svg/edge.svg" width="24" title="Edge"> Microsoft Edge em:
+### Lojas oficiais (versão original — SEI 4.x apenas)
 
-> [https://microsoftedge.microsoft.com/addons/detail/sei-pro/gkhfbbbminanojfklpfmloaglckmlfne](https://microsoftedge.microsoft.com/addons/detail/sei-pro/gkhfbbbminanojfklpfmloaglckmlfne)
+> As lojas abaixo distribuem a versão **original** do projeto, sem suporte ao SEI 5.
 
-<img src="https://edent.github.io/SuperTinyIcons/images/svg/firefox.svg" width="24" title="Firefox"> Mozilla Firefox em:
+<img src="https://edent.github.io/SuperTinyIcons/images/svg/chrome.svg" width="24" title="Chrome"> [Chrome Web Store](https://chrome.google.com/webstore/detail/sei-pro/pdbbapplhjopafpgidbgceccbbmehcjj)
 
-> [https://addons.mozilla.org/pt-BR/firefox/addon/sei-pro/](https://addons.mozilla.org/pt-BR/firefox/addon/sei-pro/)
+<img src="https://edent.github.io/SuperTinyIcons/images/svg/edge.svg" width="24" title="Edge"> [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/sei-pro/gkhfbbbminanojfklpfmloaglckmlfne)
+
+<img src="https://edent.github.io/SuperTinyIcons/images/svg/firefox.svg" width="24" title="Firefox"> [Firefox Add-ons](https://addons.mozilla.org/pt-BR/firefox/addon/sei-pro/)
 
 ## Funcionalidades disponíveis
 
@@ -98,40 +108,35 @@ Você ainda pode [Desativar funções da extensão](./pages/DESATIVARFUNCOES.md)
 
 ## Encontrou um erro?
 
-Caso deseja reportar um erro, acesse [Issue](https://github.com/pedrohsoaresadv/sei-pro/issues) no [Projeto GitHub](https://github.com/pedrohsoaresadv/sei-pro/) e adicione sua requisição.
+Abra uma [issue](https://github.com/rafaelfariasbsb/sei-pro/issues) informando:
+- Versão do SEI
+- Navegador e versão
+- Descrição do problema e passos para reproduzir
 
-## Deseja contribuir?
+## Como contribuir
 
-Envie sua sugestão de nova funcionalidade em [https://seipro.changecrab.com/suggestions](https://seipro.changecrab.com/suggestions)
-Vote nas sugestões que mais queria ver no SEI Pro!
+Este é um projeto comunitário aberto. Veja o [Guia de Contribuição](./CONTRIBUTING.md) para saber como ajudar — mesmo sem programar.
+
+Documentação técnica disponível em [`docs/`](./docs/):
+- [Arquitetura da extensão](./docs/arquitetura.md)
+- [Guia de desenvolvimento](./docs/desenvolvimento.md)
+- [Registro de seletores DOM do SEI](./docs/seletores-sei.md)
+- [Matriz de compatibilidade](./docs/matriz-compatibilidade.md)
 
 ## SEI Pro no ParticiPEN
 
-Participe da Comunidade do Processo Eletrônico Nacional (ParticiPEN), espaço criado para compartilhar ideias, experiências e discussões técnicas.
+Participe da Comunidade do Processo Eletrônico Nacional (ParticiPEN):
 [https://participen.processoeletronico.gov.br/c/modulos-comunidade/sei-pro/39](https://participen.processoeletronico.gov.br/c/modulos-comunidade/sei-pro/39)
-
-## Comunidade SEI Lab
-
-Participe do laboratorio de ideias sobre inovações para o SEI, automações e boas práticas.
-
-> <img src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" data-canonical-src="https://github.com/pedrohsoaresadv/sei-pro/raw/master/img/whatsapp.png" width="16"/> [https://bit.ly/Comunidade_SEI_Lab](https://bit.ly/Comunidade_SEI_Lab)
-
-
-## Novidades e dicas
-
-Receba em primeira mão sobre novidades e atualizações do SEI Pro. 
-
-Inscreva-se na nossa Lista de e-mail: [http://eepurl.com/hjHh45](http://eepurl.com/hjHh45)
 
 ## Histórico de versões
 
-Confira nosso [Histórico de versões](./pages/HISTORICO.md)
+Confira o [CHANGELOG](./CHANGELOG.md).
 
 ## Licença
 
-AGPL-3.0
+[AGPL-3.0](./LICENSE.txt) — fork do projeto original criado por Pedro Henrique Soares.
 
 ## Política de Privacidade
 
-Confira nossa Declaração de Não Coleta de Dadosm em confomidade com a Lei nº 13.709/2018 (LGPD) e com as melhores práticas de segurança da informação: [Política de Privacidade](./PRIVACY_POLICY.md)
+Esta extensão não coleta dados dos usuários. Veja a [Política de Privacidade](./PRIVACY_POLICY.md) completa.
 

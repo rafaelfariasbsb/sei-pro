@@ -566,7 +566,10 @@ function insertGroupTable(TimeOut = 9000) {
                                  '</div>';
 
             if ( $('#selectGroupTablePro').length == 0 && $('#tblProcessosDetalhado').length == 0) { 
-                $('#divFiltro').after(htmlControl).css('width','50%');
+                // No SEI 5 o #divFiltro e uma row do Bootstrap; forcar width:50%
+                // quebra a linha e empilha os links de filtro. Ver docs/seletores-sei.md
+                $('#divFiltro').after(htmlControl);
+                if (!isSEI_5) $('#divFiltro').css('width','50%');
                 setTimeout(function(){ 
                     updateGroupTable($('#selectGroupTablePro'));
                     if ($('#selectGroupTablePro_chosen').length == 0 && verifyConfigValue('substituiselecao')) {

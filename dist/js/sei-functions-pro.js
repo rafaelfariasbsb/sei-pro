@@ -12442,7 +12442,10 @@ function camposDinamicosProcesso(arrayTags) {
 function setInfraImg(target = $('html')) {
     target.find('img[src*="/infra_css/"], img.infraImg, img.InfraImg').wrap(function(){
         if ($(this).is(':visible')) {
-            return ($(this).closest('.infraImgPro').length == 0 && $(this).closest('#tblAnexos').length == 0) ? '<span class="infraImgPro" data-img="'+$(this).attr('src')+'"></span>' : false;
+            // A seta do menu (/infra_css/imagens/menu_seta.png) fica dentro de uma
+            // ancora display:flex no SEI 5; o wrapper vira item flex de ~125px e
+            // rouba o espaco do texto, desalinhando a seta. Ver docs/seletores-sei.md
+            return ($(this).closest('.infraImgPro').length == 0 && $(this).closest('#tblAnexos').length == 0 && !$(this).hasClass('infraImgSetaMenu')) ? '<span class="infraImgPro" data-img="'+$(this).attr('src')+'"></span>' : false;
         } else {
             return false;
         }

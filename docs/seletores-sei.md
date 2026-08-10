@@ -401,6 +401,29 @@ Medido numa instância SEI 5 (`#divFiltro` com 1489px disponíveis):
 
 ---
 
+### Gotcha de layout — não inserir elementos dentro de âncoras `display:flex`
+
+No SEI 5 o menu lateral usa `a.infraAnchorMenu` com `display:flex`, e o alinhamento da seta depende da distribuição do espaço entre os três filhos:
+
+```html
+<a class="infraAnchorMenu">          <!-- display:flex -->
+  <img src="menu/administracao.svg">  <!-- 24px -->
+  <span>Administração</span>          <!-- flex-grow:1 → estica e empurra a seta -->
+  <img class="infraImgSetaMenu">      <!-- 12px, encostada na borda -->
+</a>
+```
+
+Envolver a seta num elemento extra cria um **quarto item flex**, que disputa espaço com o texto:
+
+| | `span` do texto | posição da seta |
+|---|---|---|
+| Nativo | 317px | 359 (borda do menu = 384) |
+| Com wrapper na seta | 209px | 251 (wrapper ficou com **125px**) |
+
+**Regra:** ao injetar wrappers genéricos por seletor amplo (ex.: `img[src*="/infra_css/"]`), **excluir explicitamente elementos dentro de containers flex do SEI 5**. A função `setInfraImg()` já tem lista de exclusão — é onde esses casos devem entrar.
+
+---
+
 ### Bugs da extensão descobertos por este mapeamento
 
 | # | Onde | Problema | Correção |

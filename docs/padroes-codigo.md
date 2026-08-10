@@ -54,11 +54,15 @@ var idFrame = isSEI_5 ? 'novoFrameSei5' : 'ifrArvore';
 
 **Para diferenças maiores — bloco if/else com comentário:**
 ```javascript
-if (isSEI_5) {
-    // CKEditor 5: acessa conteúdo via API do editor
-    var conteudo = InfraEditor.getInstancia().editor.getData();
+// ATENÇÃO: para o EDITOR, ramifique pelo editor presente, NÃO por isSEI_5.
+// O SEI 5 mantém CK4 e CK5, escolhidos por documento (CK5 é opt-in por unidade).
+if (typeof inicializadorDll !== 'undefined') {
+    // CKEditor 5: multi-root — rootName é OBRIGATÓRIO, não existe root 'main'
+    var ed = inicializadorDll.editores[0];
+    var root = ed.model.document.selection.getFirstPosition().root.rootName;
+    var conteudo = ed.getData({ rootName: root });
 } else {
-    // Editor legado: acessa diretamente o iframe
+    // Editor legado (CK4): acessa diretamente o iframe
     var conteudo = document.getElementById('ifrEditor')
         .contentDocument.body.innerHTML;
 }

@@ -1,8 +1,8 @@
 # Roadmap do Projeto
 
 **Projeto:** SEI Pro — Fork Comunitário  
-**Versão:** 1.0  
-**Data:** 2025-05-13
+**Versão:** 2.0  
+**Data:** 2026-08-10 (v1.0 em 2025-05-13)
 
 ---
 
@@ -36,19 +36,28 @@ Tornar o SEI Pro a extensão de referência para usuários do SEI, com suporte c
 
 **Critério de conclusão:** Funcionalidades críticas (layout, árvore, lista de processos) operando no SEI 5.
 
+> **Resultado do diagnóstico (10/08/2026):** o mapeamento provou que **o SEI 5 quebrou muito menos do que esta fase supunha**. Cinco das entregas abaixo foram **canceladas por não haver o que corrigir** — e uma delas (checkboxes) teria **quebrado a extensão** se executada como planejado. Detalhes e evidências em [`especificacao-sei5.md`](./especificacao-sei5.md) e [`seletores-sei.md`](./seletores-sei.md).
+
 | Entrega | Prioridade | Status |
 |---|---|---|
-| Mapear seletores DOM alterados no SEI 5 (usar fonte `/FontesSEI`) | 🔴 Alta | Pendente |
-| Preencher `docs/seletores-sei.md` com mapeamento SEI 4→5 | 🔴 Alta | Pendente |
-| Corrigir detecção de versão (`getSeiVersionPro`) para SEI 5 | 🔴 Alta | Pendente |
-| Corrigir seletores de iframe (ifrArvore, ifrVisualizacao) | 🔴 Alta | Pendente |
-| Corrigir seletores de painéis (divInfraAreaTelaE/D) | 🔴 Alta | Pendente |
-| Adaptar detecção de ícones GIF → SVG no SEI 5 | 🟡 Média | Pendente |
-| Corrigir seletores de checkboxes (Bootstrap 4 no SEI 5) | 🟡 Média | Pendente |
+| Mapear seletores DOM alterados no SEI 5 (fonte 5.0.0 + 5.0.3 + DOM ao vivo) | 🔴 Alta | ✅ Concluído |
+| Preencher `docs/seletores-sei.md` com mapeamento SEI 4→5 | 🔴 Alta | ✅ Concluído |
+| Corrigir `siglaUnidadeAtual` — ID `#lnkInfraUnidade` duplicado no SEI 5 | 🔴 Alta | ✅ Concluído |
+| Corrigir detecção de versão (`getSeiVersionPro`) para SEI 5 | 🔴 Alta | ❌ Cancelado — já funciona; detecta por `title`, que não mudou |
+| Corrigir seletores de iframe (ifrArvore, ifrVisualizacao) | 🔴 Alta | ❌ Cancelado — IDs inalterados desde o SEI 4.1 |
+| Corrigir seletores de painéis (divInfraAreaTelaE/D) | 🔴 Alta | ❌ Cancelado — IDs preservados; só classes Bootstrap novas |
+| Adaptar detecção de ícones GIF → SVG no SEI 5 | 🟡 Média | ❌ Cancelado — extensão já usa `src*=`, que tolera a query string |
+| Corrigir seletores de checkboxes (Bootstrap 4 no SEI 5) | 🟡 Média | ❌ Cancelado — **premissa falsa**; renderer BS4 é código morto |
 | Smoke test completo no SEI 5 (Chrome) | 🔴 Alta | Pendente |
 | Smoke test completo no SEI 4.1 — validar não-regressão | 🔴 Alta | Pendente |
 | Configurar GitHub Actions — release automático (zip) | 🟡 Média | Pendente |
 | Publicar primeira release do fork (v1.6.2) | 🔴 Alta | Pendente |
+
+### Lições que valem como regra de projeto
+
+1. **Mapear antes de codar funcionou.** Quatro das cinco "correções" previstas eram desnecessárias e uma era ativamente danosa. Executar a Fase 1 como escrita teria introduzido regressões.
+2. **Ancorar em ID ou classe `infra*`, nunca em utilitária do Bootstrap.** Entre 5.0.0 e 5.0.3 o `#divInfraAreaTelaD` trocou de `px-3` para `infraAreaTelaDExibeGrande infraAreaTelaDExibePequeno` — o ID não mudou.
+3. **Nenhum seletor entra na documentação sem evidência** (arquivo:linha do fonte, ou medição no DevTools).
 
 ---
 
@@ -58,9 +67,14 @@ Tornar o SEI Pro a extensão de referência para usuários do SEI, com suporte c
 
 **Critério de conclusão:** Barra de ferramentas da extensão funcionando no editor do SEI 5; funcionalidades core do editor operando.
 
+> **Esta é a fase onde está o trabalho real.** O diagnóstico confirmou a ruptura do editor — e mostrou que ela é **maior** do que o previsto: o SEI 5 mantém CK4 **e** CK5 escolhidos por documento (CK5 é opt-in por unidade via `SEI_NOVO_EDITOR_UNIDADES`), e o CK5 é **multi-root sem root `'main'`**, o que faz `getData()` e `inserirHtml()` lançarem exceção se usados da forma óbvia.
+
 | Entrega | Prioridade | Status |
 |---|---|---|
-| Analisar API do CKEditor 5 usado pelo SEI 5 | 🔴 Alta | Pendente |
+| Analisar API do CKEditor 5 usado pelo SEI 5 | 🔴 Alta | ✅ Concluído — API é `window.inicializadorDll` (não `InfraEditor.getInstancia()`) |
+| Detecção de editor em runtime (CK4 × CK5), substituindo `isSEI_5` | 🔴 Alta | Pendente |
+| Camada de acesso multi-root (get/set/inserir por root) | 🔴 Alta | Pendente |
+| Injetar a toolbar da extensão na `.ck-toolbar` | 🔴 Alta | Pendente |
 | Adaptar `sei-pro-editor.js` para integrar com CKEditor 5 | 🔴 Alta | Pendente |
 | Restaurar: nota de rodapé | 🔴 Alta | Pendente |
 | Restaurar: sumário automático | 🔴 Alta | Pendente |
@@ -77,6 +91,8 @@ Tornar o SEI Pro a extensão de referência para usuários do SEI, com suporte c
 ## Fase 3 — Compatibilidade dos Demais Módulos
 
 **Objetivo:** Restaurar os módulos restantes no SEI 5, em ordem de impacto para o usuário.
+
+> **Escopo provavelmente menor que o previsto.** O mapeamento não encontrou mudança de DOM que afete estes módulos: árvore, tabelas de processo (`#tblProcessosRecebidos`/`Gerados`/`Detalhado`), checkboxes (`chkRecebidosItem`) e paginação (`.infraAreaPaginacao`) estão inalterados. O trabalho aqui tende a ser **retestar e corrigir o que aparecer**, não reescrever. Os itens abaixo devem ser lidos como "**validar no SEI 5**", e só viram trabalho de código se o teste falhar.
 
 | Entrega | Prioridade | Status |
 |---|---|---|

@@ -99,17 +99,22 @@ var editor = CKEDITOR.instances['txtDescricao'];
 
 ### SEI 5 (CKEditor 5) — A IMPLEMENTAR
 
+> ⚠️ **API confirmada no fonte e no DOM (10/08/2026).** Não é `InfraEditor.getInstancia()` — essa era uma hipótese antiga, incorreta. Ver [`../seletores-sei.md`](../seletores-sei.md).
+
 ```javascript
 // Acesso à instância CKEditor 5 via wrapper do SEI
-// INVESTIGAR: API exata de InfraEditor no fonte do SEI 5
-var infraEditor = InfraEditor.getInstancia();
-var editor = infraEditor.editor; // instância CKEditor 5
+var editor = inicializadorDll.editores[0];   // window.inicializadorDll
 
-// Leitura do conteúdo
-var conteudo = editor.getData();
+// O editor é MULTI-ROOT e NÃO existe root 'main':
+// os roots são um por campo do modelo (txaEditor_200, txaEditor_201, …)
+var root = editor.model.document.selection.getFirstPosition().root.rootName;
 
-// Definir conteúdo
-editor.setData(novoConteudo);
+// Leitura do conteúdo — rootName é OBRIGATÓRIO
+var conteudo = editor.getData({ rootName: root });
+// editor.getData()  →  LANÇA datacontroller-get-non-existent-root
+
+// Definir conteúdo (por root)
+editor.setData({ [root]: novoConteudo });
 
 // Inserção no cursor (modelo CKEditor 5)
 editor.model.change(function(writer) {
@@ -117,7 +122,12 @@ editor.model.change(function(writer) {
     writer.insertText(texto, insertPosition);
 });
 
-// Inserção de HTML no cursor
+// Inserção de HTML no cursor — o SEI já expõe um helper pronto:
+inicializadorDll.inserirHtml(htmlParaInserir);
+// GOTCHA: sem posição, insere na SELEÇÃO ATUAL e IGNORA o root informado.
+// Chamado sem foco no editor, lança "Seção de conteúdo não encontrada."
+
+// Equivalente manual, se precisar de controle fino:
 var viewFragment = editor.data.processor.toView(htmlParaInserir);
 var modelFragment = editor.data.toModel(viewFragment);
 editor.model.insertContent(modelFragment);

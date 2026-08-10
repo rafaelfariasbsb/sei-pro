@@ -1206,7 +1206,10 @@ function orderDivPanel(html, idOrder, name) {
 }
 function insertDivPanelControleProc() {
     var elementControleProc = isNewSEI ? 'collapseTabelaProcesso' : 'frmProcedimentoControlar';
-    var statusView = ( getOptionsPro(elementControleProc) == 'hide' ) ? 'none' : 'initial';
+    // No SEI 5 o #divFiltro e uma row do Bootstrap (display:flex). Forcar
+    // 'initial' computa como block e empilha os filtros. String vazia remove o
+    // display inline e deixa a classe .row valer. Ver docs/seletores-sei.md
+    var statusView = ( getOptionsPro(elementControleProc) == 'hide' ) ? 'none' : ( isSEI_5 ? '' : 'initial' );
     var statusIconShow = ( getOptionsPro(elementControleProc) == 'hide' ) ? '' : 'display:none;';
     var statusIconHide = ( getOptionsPro(elementControleProc) == 'hide' ) ? 'display:none;' : '';
     var idControleProc = isNewSEI ? '.'+elementControleProc : '#'+elementControleProc;

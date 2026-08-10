@@ -385,6 +385,22 @@ O mapeamento foi reconferido contra o fonte do **SEI 5.0.3** (Infra 2.41.1) — 
 
 **Causa raiz do ID duplicado** (bug #1 abaixo): `InfraPaginaEsquema3` emite a barra do sistema **duas vezes** — `#divInfraBarraSistemaMovel` (`d-md-none`, linha 1270) e `#divInfraBarraSistemaPadrao` (linha 1283) — e ambas contêm o mesmo bloco. Por isso `#lnkInfraUnidade` e a `<img>` de versão aparecem em duplicata. **Presente igual em 5.0.0 e 5.0.3.**
 
+### Gotcha de layout — não sobrescrever `display` em elementos `.row`
+
+No SEI 5 vários containers viraram **`row` do Bootstrap** (`display: flex`), entre eles o `#divFiltro` da tela de Controle de Processos. Qualquer código que force um `display` inline nesses elementos **destrói o layout**, mesmo com largura sobrando.
+
+Medido numa instância SEI 5 (`#divFiltro` com 1489px disponíveis):
+
+| `display` inline | computado | links de filtro |
+|---|---|---|
+| `initial` | `block` | **5 linhas** (empilhados) |
+| `inline-table` | `table` | **5 linhas** |
+| `''` (sem inline) | **`flex`** | **1 linha** ✅ |
+
+**Regra:** para reexibir um elemento, use `.css('display','')` — que **remove** a declaração inline e devolve o controle ao CSS — em vez de chutar um valor (`initial`, `block`, `inline-table`). Para esconder, `none` continua correto.
+
+---
+
 ### Bugs da extensão descobertos por este mapeamento
 
 | # | Onde | Problema | Correção |

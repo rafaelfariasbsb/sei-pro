@@ -6180,7 +6180,8 @@ function toggleTablePro(idTable, mode) {
 		$('#'+elemTable+'_showIcon').show();
         setOptionsPro(elemTable, 'hide');
 	} else {
-		$(idTable).removeClass('displayNone').css('display', 'inline-table');
+		// SEI 5: 'inline-table' quebra a row do Bootstrap (ver insertDivPanelControleProc)
+		$(idTable).removeClass('displayNone').css('display', isSEI_5 ? '' : 'inline-table');
 		$('#'+elemTable+'_hideIcon').show();
 		$('#'+elemTable+'_showIcon').hide();
         setOptionsPro(elemTable, 'show');

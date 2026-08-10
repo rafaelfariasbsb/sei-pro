@@ -34,7 +34,7 @@ var isNewSEI = getIsNewSEI();
 var isSEI_5 = isNewSEI && getSeiVersionPro() && compareVersionNumbers(getSeiVersionPro(),'5') >= 0 ? true : false;
 const lnkInfraUnidade = $('#lnkInfraUnidade').attr('onclick');
 const infra_unidade_atual = lnkInfraUnidade ? getParamsUrlPro(lnkInfraUnidade.split("'")[1]).infra_unidade_atual : null;
-var siglaUnidadeAtual = isNewSEI ? $('#lnkInfraUnidade').text().trim() : $('#selInfraUnidades').find('option:selected').text().trim();
+var siglaUnidadeAtual = isNewSEI ? $('#lnkInfraUnidade').first().text().trim() : $('#selInfraUnidades').find('option:selected').text().trim();
 var frmEditor = isSEI_5 ? $('.infra-editor__editor-completo') : $('#frmEditor');
 var idUnidade = isNewSEI ? infra_unidade_atual : $('#selInfraUnidades').val();
 var divInformacao = isNewSEI ? '#divArvoreInformacao' : '#divInformacao';
@@ -6755,7 +6755,7 @@ function checkDadosIframeProcessoPro(mode) {
                 getLinksArvorePro(_ifrArvore);
                 getDadosPesquisaPro(iframe, mode);
                 getListaAtribuicaoProcesso(ifrArvoreElem, mode);
-                unidade = isNewSEI ? $('#lnkInfraUnidade').text() : $('#selInfraUnidades').find('option:selected').text().trim();
+                unidade = isNewSEI ? $('#lnkInfraUnidade').first().text() : $('#selInfraUnidades').find('option:selected').text().trim();
             } else {
                 checkDadosIframeProcessoPro(mode);
             }
@@ -11648,7 +11648,7 @@ function setSelectUnidadePro() {
             url = typeof url !== 'undefined' ? url.split("'")[1] : false;
         let listUnidades = sessionStorageRestorePro('unidadesPermissaoSEIPro');
         let htmlOptionsUnidades = $.map(listUnidades,function(v){
-                                let selected = $('#lnkInfraUnidade').text() == v.sigla ? 'selected' : '';
+                                let selected = $('#lnkInfraUnidade').first().text() == v.sigla ? 'selected' : '';
                                 return `<option value="${v.id}" ${selected}>${v.sigla} (${v.orgao})</option>`  
                                 }).join('');
         let htmlSelect = `<select data-url="${url}" style="width: 200px;" onchange="_changeUnidadeSEI(this)" id="changeUnidadeSEIPro">${htmlOptionsUnidades}</select>`;

@@ -12466,7 +12466,14 @@ function setInfraImg(target = $('html')) {
             // A seta do menu (/infra_css/imagens/menu_seta.png) fica dentro de uma
             // ancora display:flex no SEI 5; o wrapper vira item flex de ~125px e
             // rouba o espaco do texto, desalinhando a seta. Ver docs/seletores-sei.md
-            return ($(this).closest('.infraImgPro').length == 0 && $(this).closest('#tblAnexos').length == 0 && !$(this).hasClass('infraImgSetaMenu')) ? '<span class="infraImgPro" data-img="'+$(this).attr('src')+'"></span>' : false;
+            // vazio.svg e o espacador dos sub-itens do menu (itens sem icone
+            // proprio). Embrulha-lo nao serve para nada — nao ha icone a
+            // substituir — e o <span> vira item flex na ancora do menu, empurrando
+            // o texto para a direita: no SEI 4.1 os sub-itens (Avaliacao CPAD,
+            // Documentos para Eliminacao, ...) apareciam desalinhados. O CSS do
+            // Estilo Avancado ja escondia esse span, mas so sob .seiSlim.
+            var srcImg = $(this).attr('src') || '';
+            return ($(this).closest('.infraImgPro').length == 0 && $(this).closest('#tblAnexos').length == 0 && !$(this).hasClass('infraImgSetaMenu') && srcImg.indexOf('/vazio.') === -1) ? '<span class="infraImgPro" data-img="'+srcImg+'"></span>' : false;
         } else {
             return false;
         }

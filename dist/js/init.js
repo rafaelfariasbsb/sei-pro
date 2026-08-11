@@ -23,7 +23,13 @@ $.getScript(getUrlExtension("js/lib/moment.min.js")).done(function () {
 $.getScript(getUrlExtension("js/lib/crypto-js.min.js"));
 $.getScript(getUrlExtension("js/lib/diff2html.min.js"));
 $.getScript(getUrlExtension("js/sei-pro-docs-lote.js"));
-if (typeof loadFunctionsPro === 'undefined' || window.name != '') $.getScript(getUrlExtension("js/sei-functions-pro.js"));
+// O sei-pro.js depende de funcoes daqui (checkHostLimit, isSEI_5, ...) ja no
+// initSeiPro, disparado no document.ready. Guardamos a promise para encadear o
+// carregamento dele e evitar a corrida — o sei-functions-pro.js tem ~1,2 MB e
+// costuma perder para os arquivos menores.
+var carregandoFunctionsPro = (typeof loadFunctionsPro === 'undefined' || window.name != '')
+    ? $.getScript(getUrlExtension("js/sei-functions-pro.js"))
+    : $.Deferred().resolve().promise();
 
 function divIconsLoginPro() {
     var html_initLogin = '<div class="infraAcaoBarraSistema sheetsLoginPro" style="display: inline-block;">'
@@ -333,7 +339,9 @@ function loadScriptPro() {
         classBodyPro();
         loadFilesUI();
         loadFontIcons('head');
-        $.getScript(getUrlExtension("js/sei-pro.js"));
+        carregandoFunctionsPro.done(function () {
+            $.getScript(getUrlExtension("js/sei-pro.js"));
+        });
 
         $(document).ready(function () {
             loadConfigPro();

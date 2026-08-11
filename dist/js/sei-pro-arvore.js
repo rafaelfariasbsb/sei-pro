@@ -1948,9 +1948,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                     '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                     '      <i class="fas fa-comment-dots azulColor iconDadosProcesso"></i>'+
                                     '      Especifica\u00E7\u00E3o:'+
-                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_descricao') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_descricao') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                     '   </label>'+
-                                    '   <div class="infoDadosArvore" style="position: relative;min-height: 60px;'+(getOptionsPro('panelDadosArvorePro_descricao') == 'hide' ? 'display:none' : '')+'">'+
+                                    '   <div class="infoDadosArvore" style="position: relative;min-height: 60px;'+(getOptionsPro('panelDadosArvorePro_descricao') != 'visible' ? 'display:none' : '')+'">'+
                                     '       <a class="newLink '+(txtDescricao && txtDescricao.toLowerCase().indexOf('(urgente)') !== -1 ? 'urgentePro' : '')+'" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+(txtDescricao && txtDescricao.toLowerCase().indexOf('(urgente)') !== -1 ? '<div class="urgentePro"></div>' : '')+(txtDescricao ? txtDescricao : '')+'</a>'+
                                     (processoAberto ?
                                     '       <a class="newLink" maxlength="100" data-mode="descricao" style="cursor:pointer;float: right;" onclick="parent.editDadosArvorePro(this)" onmouseover="return infraTooltipMostrar(\'Clique para editar\');" onmouseout="return infraTooltipOcultar();"><i class="fas fa-edit"></i></a>'+
@@ -1993,9 +1993,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                     '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                     '      <i class="fas fa-tags azulColor iconDadosProcesso"></i>'+
                                     '      Marcador:'+
-                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_marcador') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_marcador') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                     '   </label>'+
-                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_marcador') == 'hide' ? 'display:none' : 'position: relative;min-height: 60px;')+'">'+
+                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_marcador') != 'visible' ? 'display:none' : 'position: relative;min-height: 60px;')+'">'+
                                     '       <a class="newLink" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+iconMarcador+'</a>'+linkPrazo+
                                     (processoAberto ?
                                     '       <a class="newLink" maxlength="100" data-mode="marcador" style="cursor:pointer;float: right;" onclick="parent.getRemoverMarcador()" onmouseover="return infraTooltipMostrar(\'Clique para remover o marcador\');" onmouseout="return infraTooltipOcultar();"><i class="fas fa-trash"></i></a>'+
@@ -2018,9 +2018,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                     '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                     '      <i class="fas fa-eye azulColor iconDadosProcesso"></i>'+
                                     '      Acompanhamento Especial:'+
-                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_acompanhamento_especial') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_acompanhamento_especial') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                     '   </label>'+
-                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_acompanhamento_especial') == 'hide' ? 'display:none' : '')+'">'+
+                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_acompanhamento_especial') != 'visible' ? 'display:none' : '')+'">'+
                                     '       <a class="newLink" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+txtAcompEsp+'</a>'+iconReabertura+
                                     '       <a class="newLink" maxlength="100" data-mode="acompanhamento_especial" style="cursor:pointer;float: right;" onclick="parent.editDadosArvorePro(this)" onmouseover="return infraTooltipMostrar(\'Clique para editar\');" onmouseout="return infraTooltipOcultar();"><i class="fas fa-edit"></i></a>'+
                                     '   </div>'+
@@ -2031,9 +2031,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                     '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                     '      <i class="fas fa-inbox azulColor iconDadosProcesso"></i>'+
                                     '      Tipo de Processo:'+
-                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_tipo_procedimento') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_tipo_procedimento') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                     '   </label>'+
-                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_tipo_procedimento') == 'hide' ? 'display:none' : '')+'">'+
+                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_tipo_procedimento') != 'visible' ? 'display:none' : '')+'">'+
                                     '       <a class="newLink" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+prop.hdnNomeTipoProcedimento+'</a>'+
                                     (processoAberto ?
                                     '       <a class="newLink" data-mode="tipo_procedimento" style="cursor:pointer;float: right;" onclick="parent.editDadosArvorePro(this)" onmouseover="return infraTooltipMostrar(\'Clique para editar\');" onmouseout="return infraTooltipOcultar();"><i class="fas fa-edit"></i></a>'+
@@ -2052,9 +2052,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                 '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                 '      <i class="'+dataNivelAcesso.icon+' azulColor iconDadosProcesso"></i>'+
                                 '      N\u00EDvel de Acesso:'+
-                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_nivel_acesso') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_nivel_acesso') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                 '   </label>'+
-                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_nivel_acesso') == 'hide' ? 'display:none' : '')+'">'+
+                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_nivel_acesso') != 'visible' ? 'display:none' : '')+'">'+
                                 '      <a class="newLink" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+dataNivelAcesso.name+'</a>'+
                                 (processoAberto ?
                                 '       <a class="newLink" data-mode="nivel_acesso" style="cursor:pointer;float: right;" onclick="parent.editDadosArvorePro(this)" onmouseover="return infraTooltipMostrar(\'Clique para editar\');" onmouseout="return infraTooltipOcultar();"><i class="fas fa-edit"></i></a>'+
@@ -2075,9 +2075,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                 '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                 '      <i class="fas fa-book azulColor iconDadosProcesso"></i>'+
                                 '      Bloco Interno:'+
-                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_bloco_interno') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_bloco_interno') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                 '   </label>'+
-                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_bloco_interno') == 'hide' ? 'display:none' : '')+'">'+
+                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_bloco_interno') != 'visible' ? 'display:none' : '')+'">'+
                                 '      <a class="newLink infoDadosArvore_bloco_interno" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+descBlocoInterno+'</a>'+
                                 // (processoAberto ?
                                 // '       <a class="newLink" data-mode="bloco_interno" style="cursor:pointer;float: right;" onclick="parent.editDadosArvorePro(this)" onmouseover="return infraTooltipMostrar(\'Clique para editar\');" onmouseout="return infraTooltipOcultar();"><i class="fas fa-edit"></i></a>'+
@@ -2090,9 +2090,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                     '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                     '      <i class="fas fa-users azulColor iconDadosProcesso"></i>'+
                                     '      Interessados:'+
-                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_interessados') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                    '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_interessados') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                     '   </label>'+
-                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_interessados') == 'hide' ? 'display:none' : '')+'">'+
+                                    '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_interessados') != 'visible' ? 'display:none' : '')+'">'+
                                             $.map(prop.selInteressadosProcedimento_list, function(v, i){ 
                                                 var return_ = ((prop.selInteressadosProcedimento_list.length-1) != i && prop.selInteressadosProcedimento_list.length > 1) ? '<div style="border-bottom: 1px solid #ececec;" class="dadosInteressados">' : '<div class="dadosInteressados">';
                                                 if (v.name.indexOf('(') !== -1) {
@@ -2117,9 +2117,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                             '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                             '      <i class="fas fa-bookmark azulColor iconDadosProcesso"></i>'+
                             '      Assuntos:'+
-                            '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_assuntos') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                            '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_assuntos') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                             '   </label>'+
-                            '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_assuntos') == 'hide' ? 'display:none' : '')+'">'+
+                            '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_assuntos') != 'visible' ? 'display:none' : '')+'">'+
                                 $.map(prop.selAssuntos_select, function(v){ return '<div><a class="newLink" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+v+'</a></div>' }).join('')+
                             '   </div>'+
                             '</div>';
@@ -2129,9 +2129,9 @@ function setDadosProcessoArvore(dadosProcessoPro = false) {
                                 '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                 '      <i class="fas fa-comment-alt azulColor iconDadosProcesso"></i>'+
                                 '      Observa\u00E7\u00F5es:'+
-                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_observacoes') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_observacoes') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                 '   </label>'+
-                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_observacoes') == 'hide' ? 'display:none' : '')+'">'+
+                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_observacoes') != 'visible' ? 'display:none' : '')+'">'+
                                         $.map(prop.txaObservacoes, function(v){ return '<div><a class="newLink" style="cursor:pointer;max-width: calc(100% - 70px);" onclick="parent.copyTextThis(this)" onmouseover="return infraTooltipMostrar(\'Clique para copiar\');" onmouseout="return infraTooltipOcultar();">'+v.unidade+': '+v.observacao+'</a></div>' }).join('')+
                                 '   </div>'+
                                 '</div>';
@@ -2267,9 +2267,9 @@ function getAtividadesProcessoArvore() {
                             '      Atividades:'+
                             '       <span class="atividadesProActionsArvore">'+
                             '       </span>'+
-                            '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_atividades') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                            '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_atividades') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                             '   </label>'+
-                            '   <div class="infoDadosArvore kanban-container" style="'+(getOptionsPro('panelDadosArvorePro_atividades') == 'hide' ? 'display:none' : '')+';padding: 10px 0;max-height: 800px;overflow-y: scroll;">'+
+                            '   <div class="infoDadosArvore kanban-container" style="'+(getOptionsPro('panelDadosArvorePro_atividades') != 'visible' ? 'display:none' : '')+';padding: 10px 0;max-height: 800px;overflow-y: scroll;">'+
                             '       '+htmlInfoAtividades+
                             '   </div>'+
                             '</div>';
@@ -2328,9 +2328,9 @@ function stylePanelArvore() {
                                 '   <label class="newLink" style="margin-bottom: 10px; display: block;">'+
                                 '      <i class="fas fa-user-tie azulColor iconDadosProcesso"></i>'+
                                 '      Atribui\u00E7\u00E3o:'+
-                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_responsaveis') == 'hide' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
+                                '      <i class="fas fa-chevron-'+(getOptionsPro('panelDadosArvorePro_responsaveis') != 'visible' ? 'right' : 'down')+' azulColor" style="float: right; cursor:pointer; margin-right: 20px;" onclick="togglePanelDadosArvore(this)"></i>'+
                                 '   </label>'+
-                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_responsaveis') == 'hide' ? 'display:none' : '')+'">'+
+                                '   <div class="infoDadosArvore" style="'+(getOptionsPro('panelDadosArvorePro_responsaveis') != 'visible' ? 'display:none' : '')+'">'+
                                 '       '+htmlInfoResponsaveis+
                                 '   </div>'+
                                 '</div>';

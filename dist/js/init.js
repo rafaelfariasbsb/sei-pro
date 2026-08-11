@@ -4,7 +4,13 @@ var isSEI_5 = isNewSEI && sessionStorage.getItem('versaoSei') && compareVersionN
 var frmEditor = isSEI_5 ? $('.infra-editor__editor-completo') : $('#frmEditor');
 var frmEditor5Exists = $('html script[charset="utf-8"]').last().html().includes('INFRA_EDITOR_CONFIG');
 
-$.getScript(getUrlExtension("js/lib/jquery-3.4.1.min.js"));
+// NAO recarregar o jQuery aqui. A propria linha usaria $.getScript, entao o
+// jQuery ja existe obrigatoriamente (vem do manifest em todos os content_scripts
+// que injetam este arquivo). Reexecutar o jquery.min.js SUBSTITUI window.jQuery
+// por uma instancia nova, derrubando os plugins acoplados a anterior — e o
+// manifest injeta o jquery-ui logo apos o jQuery. Resultado: $().resizable,
+// $().sortable, $().tabs e $().draggable deixavam de existir (a barra que
+// redimensiona a arvore parava de funcionar, entre outros).
 $.getScript(getUrlExtension("js/lib/jmespath.min.js"));
 $.getScript(getUrlExtension("js/lib/purify.min.js"));
 // moment-duration-format depende do moment ja estar carregado e lanca

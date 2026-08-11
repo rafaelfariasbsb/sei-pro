@@ -117,6 +117,9 @@ Tornar o SEI Pro a extensão de referência para usuários do SEI, com suporte c
 
 | Entrega | Prioridade | Status |
 |---|---|---|
+| **Auditoria dinâmica de tráfego** (DevTools > Network numa sessão real) para confirmar o que sai do navegador | 🔴 Alta | Backlog |
+| **ADR — dependência do domínio `seipro.app`** (desativado; ver levantamento abaixo) | 🔴 Alta | Backlog |
+| **Legística: desativar ou reimplementar** — hoje envia referências de normas sem opt-in | 🔴 Alta | Backlog |
 | Atualizar jQuery para versão atual (3.7+) | 🟡 Média | Pendente |
 | Atualizar demais dependências com CVEs conhecidos | 🔴 Alta | Pendente |
 | Refatorar `sei-pro-atividades.js` (2.1 MB → módulos menores) | 🟡 Média | Pendente |
@@ -124,6 +127,31 @@ Tornar o SEI Pro a extensão de referência para usuários do SEI, com suporte c
 | Adicionar ESLint com regras básicas | 🟢 Baixa | Pendente |
 | Avaliar adoção de sistema de build (Vite) | 🟢 Baixa | Pendente |
 | Publicar nas lojas (Chrome Web Store, Firefox Add-ons) | 🟡 Média | Pendente |
+
+---
+
+### Levantamento — dependência do domínio `seipro.app` (10/08/2026)
+
+`https://seipro.app` foi desativado: **todas as rotas fazem 302 para o repositório do GitHub**, e como o GitHub não envia `Access-Control-Allow-Origin`, as chamadas falham por CORS. São 6 referências no código:
+
+| Uso | Onde | Impacto real |
+|---|---|---|
+| `/servers/` — registro de domínios autorizados + descoberta do backend | `sei-pro-atividades.js:26207` | Bloqueia apenas o **onboarding** do Controle de Prazos |
+| `/legis/` — resolve normas citadas no documento | `sei-legis.js:604`, `sei-pro-editor.js:1885` | Legística inoperante |
+| `/legis/search.php` — busca de normas no editor | `sei-pro-editor.js:1951` | idem |
+| Link de atribuição no mapa | `sei-pro-favoritos.js:1570`, `:1698` | Cosmético |
+
+**O impacto é menor do que aparenta:**
+- **Favoritos funcionam offline** — gravados em `localStorage['configDataFavoritesPro']`. O servidor só faz **sincronização entre dispositivos**.
+- **Controle de Prazos só depende disso no primeiro uso.** `initPerfilLoginAtiv()` usa o perfil salvo (`configBasePro_atividades` → `URL_API`) e só chama `getServersPro()` quando **não há perfil**. A tela de opções permite configurar **URL do Servidor + Chave de Acesso** manualmente.
+- O ramo de auto-configuração via `client_id` já estava **comentado** no fonte.
+
+**Sobre o que trafega** (auditoria estática — confirmar com auditoria dinâmica):
+- `/servers/` é `GET` **sem corpo**; o filtro por domínio roda no cliente sobre a lista inteira.
+- O backend de Atividades é travado por `if (urlServerAtiv && userHashAtiv != '')` — **nada sai sem servidor e chave configurados**, e o destino é o servidor escolhido pelo administrador.
+- ⚠️ **A Legística não tem essa trava:** `getDadosNormas()` faz `POST` das referências de normas (ex.: `lei8666`) sem verificar configuração, e `sei-legis.js` é carregado sempre que o editor abre. Não envia o texto do documento, mas é conteúdo derivado dele indo para terceiro sem opt-in.
+
+**Encaminhamento proposto (a decidir no ADR):** remover a chamada a `/servers/` e documentar a configuração manual; desativar a Legística até que seja reimplementada com trava de configuração explícita.
 
 ---
 

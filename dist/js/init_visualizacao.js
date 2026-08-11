@@ -107,5 +107,14 @@ setTimeout(() => {
         loadFontIcons('head', $('#ifrConteudoVisualizacao, #ifrVisualizacao').contents());
     }
 }, 500);
-if (typeof loadFunctionsPro === 'undefined') $.getScript(getUrlExtension("js/sei-functions-pro.js"));
-if (typeof loadSEIProVisualizacao === 'undefined') $.getScript(getUrlExtension("js/sei-pro-visualizacao.js"));
+// Mesma corrida do init_arvore.js: sei-pro-visualizacao.js depende de funcoes
+// do sei-functions-pro.js (chama parent.setCapaProcesso e checkConfigValue).
+// Encadear garante que as dependencias existam antes de executar.
+function carregarSEIProVisualizacao() {
+    if (typeof loadSEIProVisualizacao === 'undefined') $.getScript(getUrlExtension("js/sei-pro-visualizacao.js"));
+}
+if (typeof loadFunctionsPro === 'undefined') {
+    $.getScript(getUrlExtension("js/sei-functions-pro.js")).done(carregarSEIProVisualizacao);
+} else {
+    carregarSEIProVisualizacao();
+}

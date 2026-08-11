@@ -80,6 +80,17 @@ if (typeof jmespath === 'undefined') $.getScript(getUrlExtension("js/lib/jmespat
 if (typeof DOMPurify === 'undefined') $.getScript(getUrlExtension("js/lib/purify.min.js"));
 if (typeof Dropzone === 'undefined') $.getScript(getUrlExtension("js/lib/dropzone.min.js"));
 if (typeof moment === 'undefined') $.getScript(getUrlExtension("js/lib/moment.min.js"));
-if (typeof loadFunctionsPro === 'undefined') $.getScript(getUrlExtension("js/sei-functions-pro.js"));
-if (typeof loadSEIProArvore === 'undefined') $.getScript(getUrlExtension("js/sei-pro-arvore.js"));
+// sei-pro-arvore.js usa variaveis definidas pelo sei-functions-pro.js ja no
+// escopo do modulo (ex.: isSEI_5 na linha 12). Como $.getScript e assincrono,
+// disparar os dois em sequencia e uma corrida — e o arquivo menor costuma
+// vencer, morrendo com "isSEI_5 is not defined" e abortando TODO o modulo
+// (inclusive a chamada a parent.setCapaProcesso). Encadear garante a ordem.
+function carregarSEIProArvore() {
+    if (typeof loadSEIProArvore === 'undefined') $.getScript(getUrlExtension("js/sei-pro-arvore.js"));
+}
+if (typeof loadFunctionsPro === 'undefined') {
+    $.getScript(getUrlExtension("js/sei-functions-pro.js")).done(carregarSEIProArvore);
+} else {
+    carregarSEIProArvore();
+}
 

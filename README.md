@@ -5,26 +5,69 @@
 
 **SEI Pro** adiciona ao [Sistema Eletrônico de Informações (SEI)](https://softwarepublico.gov.br/social/sei) diversas funções avançadas na página inicial e no editor de textos.
 
-| Versão do SEI | Status |
-|---|---|
-| SEI 4.0 / 4.1 | ✅ Compatível |
-| SEI 5.x | 🔧 Em adaptação |
+| Versão do SEI | Status | Como foi verificado |
+|---|---|---|
+| SEI 5.0.x | ✅ Funcional | testado em instância **5.0.3** e em ambiente local **5.0.0** |
+| SEI 4.1 | ✅ Funcional | testado em instância **4.1** em produção |
+| SEI 4.0 | 🔲 Não testado | nenhuma correção é específica de 4.1; sem validação prática |
 
-> Detalhes por funcionalidade e navegador: [Matriz de Compatibilidade](./docs/matriz-compatibilidade.md)
+> Detalhes por funcionalidade: [Matriz de Compatibilidade](./docs/matriz-compatibilidade.md) · Histórico completo: [CHANGELOG](./CHANGELOG.md)
+
+**Limitações conhecidas** — vale ler antes de instalar:
+
+- O **editor de documentos** ainda não foi adaptado ao **CKEditor 5**. O SEI 5 mantém os dois editores e escolhe por documento (configurável por unidade), então onde o CK4 estiver em uso o editor funciona normalmente.
+- O domínio `seipro.app`, usado pelo projeto original, foi **desativado**. Isso afeta a descoberta automática do servidor do **Controle de Prazos** — a configuração manual segue disponível nas opções — e a **Legística**.
+
+---
 
 ## Como instalar
 
-### Instalação manual (todas as versões do SEI)
+A extensão ainda **não está publicada nas lojas** (é o próximo passo do projeto). Por enquanto a instalação é manual, e leva cerca de dois minutos.
 
-1. Baixe o arquivo ZIP da [última release](https://github.com/rafaelfariasbsb/sei-pro/releases/latest)
-2. Extraia o conteúdo
-3. No navegador:
-   - **Chrome / Edge:** acesse `chrome://extensions`, ative o **Modo do desenvolvedor** e clique em **Carregar sem compactação** → selecione a pasta `dist/`
-   - **Firefox:** acesse `about:debugging` → **Carregar extensão temporária** → selecione `dist/manifest.json`
+### Chrome, Edge, Brave e outros baseados em Chromium
+
+1. **Baixe** o arquivo `sei-pro-<versão>.zip` da [última release](https://github.com/rafaelfariasbsb/sei-pro/releases/latest)
+2. **Extraia** o ZIP numa pasta definitiva — por exemplo `Documentos\sei-pro`.
+   ⚠️ **Não apague nem mova essa pasta depois.** Diferente das extensões de loja, o navegador lê os arquivos direto dali toda vez que inicia; se a pasta sumir, a extensão para de funcionar.
+3. Abra `chrome://extensions` (no Edge, `edge://extensions`)
+4. Ative o **Modo do desenvolvedor** — no Chrome fica no canto superior direito; no Edge, na barra lateral esquerda
+5. Clique em **Carregar sem compactação** e selecione **a pasta extraída** (aquela que contém o arquivo `manifest.json` — não entre em subpastas)
+6. O card **SEI Pro Lab** deve aparecer na lista. Abra o SEI e recarregue a página com **Ctrl+F5**
+
+### Firefox
+
+1. Baixe e extraia o ZIP da [última release](https://github.com/rafaelfariasbsb/sei-pro/releases/latest)
+2. Abra `about:debugging#/runtime/this-firefox`
+3. Clique em **Carregar extensão temporária** e selecione o arquivo `manifest.json` dentro da pasta
+
+> No Firefox a instalação é **temporária**: a extensão é removida ao fechar o navegador e precisa ser carregada de novo. É limitação do próprio Firefox para extensões não assinadas.
+
+### Já usa o SEI Pro original? Desative antes
+
+Se você tem a versão original instalada pela loja, **desative-a** antes de usar este fork. As duas atuam na mesma página do SEI e podem entrar em conflito, gerando comportamento imprevisível.
+
+Em `chrome://extensions`, basta desligar a chave do card da extensão original — não é preciso remover.
+
+### Como atualizar para uma versão nova
+
+1. Baixe o ZIP da nova release e extraia **por cima** da pasta existente, substituindo os arquivos
+2. Em `chrome://extensions`, clique no ícone **↻** no card da extensão
+3. Recarregue a aba do SEI com **Ctrl+F5**
+
+Confira a versão no próprio card (ex.: **SEI Pro Lab 1.6.3**) para ter certeza de que a atualização foi aplicada.
+
+### Se algo não funcionar
+
+1. Confirme que a versão no card é a que você acabou de instalar
+2. Dê **Ctrl+F5** na aba do SEI — a extensão só é injetada quando a página carrega
+3. Em `chrome://extensions`, veja se o card mostra o botão **Erros**; se mostrar, o conteúdo dele ajuda muito no diagnóstico
+4. [Abra uma issue](https://github.com/rafaelfariasbsb/sei-pro/issues) informando **a versão do SEI** (aparece ao lado do logo), o navegador e o que apareceu em Erros
+
+---
 
 ### Lojas oficiais (versão original — SEI 4.x apenas)
 
-> As lojas abaixo distribuem a versão **original** do projeto, sem suporte ao SEI 5.
+> As lojas abaixo distribuem a versão **original** do projeto, que está sem atualizações desde 2023 e **não tem suporte ao SEI 5**. Não são este fork.
 
 <img src="https://edent.github.io/SuperTinyIcons/images/svg/chrome.svg" width="24" title="Chrome"> [Chrome Web Store](https://chrome.google.com/webstore/detail/sei-pro/pdbbapplhjopafpgidbgceccbbmehcjj)
 

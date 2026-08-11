@@ -2,6 +2,8 @@
 
 Status de cada funcionalidade por versão do SEI e navegador.
 
+> **Como esta matriz foi preenchida (11/08/2026).** A coluna SEI 5.x foi verificada em instância **SEI 5.0.3** (homologação) e em ambiente local **SEI 5.0.0**; a coluna SEI 4.1, em instância **4.1** em produção. Só recebem ✅ os itens **efetivamente exercitados** — o restante permanece 🔲 (não testado), e não deve ser lido como "quebrado". Contribuições de teste são bem-vindas: veja [como contribuir](../CONTRIBUTING.md).
+
 **Legenda:**
 - ✅ Funciona
 - ⚠️ Parcial (limitações conhecidas)
@@ -19,11 +21,11 @@ Status de cada funcionalidade por versão do SEI e navegador.
 | Estilo Avançado / Modo Noturno | ✅ | ✅ | 🔲 |
 | Menu Suspenso | ✅ | ✅ | 🔲 |
 | URL Amigável | ✅ | ✅ | 🔲 |
-| Redimensionar árvore automaticamente | ✅ | ✅ | 🔲 |
+| Redimensionar árvore automaticamente | ✅ | ✅ | ✅ |
 | Dividir informações da árvore em duas linhas | ✅ | ✅ | 🔲 |
 | **Processos** | | | |
-| Favoritos | ✅ | ✅ | 🔲 |
-| Controle de Prazos (Gantt) | ✅ | ✅ | 🔲 |
+| Favoritos | ⚠️ | ⚠️ | ⚠️ |
+| Controle de Prazos (Gantt) | ⚠️ | ⚠️ | ⚠️ |
 | Agrupar lista de processos | ✅ | ✅ | 🔲 |
 | Histórico de processos visitados | ✅ | ✅ | 🔲 |
 | Exportar lista de processos (CSV) | ✅ | ✅ | 🔲 |
@@ -63,11 +65,11 @@ Status de cada funcionalidade por versão do SEI e navegador.
 | Link curto (TinyURL) | ✅ | ✅ | 🔲 |
 | Verificar integridade (Hashcode) | ✅ | ✅ | 🔲 |
 | Menu rápido na árvore | ✅ | ✅ | 🔲 |
-| Informações adicionais na árvore | ✅ | ✅ | 🔲 |
+| Informações adicionais na árvore | ✅ | ✅ | ✅ |
 | **IA** | | | |
 | Integração ChatGPT / OpenAI | ✅ | ✅ | 🔲 |
 | **Jurídico / Normativo** | | | |
-| Legística (enumerar normas) | ✅ | ✅ | 🔲 |
+| Legística (enumerar normas) | ❌ | ❌ | ❌ |
 | Link de legislação | ✅ | ✅ | 🔲 |
 | **Projetos** | | | |
 | Kanban | ✅ | ✅ | 🔲 |
@@ -88,6 +90,18 @@ Status de cada funcionalidade por versão do SEI e navegador.
 | Todas as funcionalidades core | ✅ | ✅ | ✅ |
 | Ditado por voz | ✅ | ✅ | ⚠️ |
 | OCR (Tesseract) | ✅ | ✅ | 🔲 |
+
+---
+
+## Notas sobre os itens marcados ⚠️ e ❌
+
+**Favoritos — ⚠️ em todas as versões.** Favoritar, listar e organizar funcionam **localmente** (os dados ficam em `localStorage`). O que não funciona é a **sincronização entre dispositivos**, que depende do backend do projeto original.
+
+**Controle de Prazos — ⚠️ em todas as versões.** O recurso funciona, mas a **descoberta automática do servidor** dependia do domínio `seipro.app`, hoje desativado. Quem já tem perfil configurado segue usando normalmente; para configurar do zero é preciso informar manualmente **URL do Servidor** e **Chave de Acesso** nas opções da extensão.
+
+**Legística — ❌ em todas as versões.** Dependia inteiramente de `seipro.app/legis/`, que não responde mais. Não é uma incompatibilidade com o SEI 5: quebra igual no SEI 4.
+
+**Editor de documentos — a coluna SEI 5.x merece uma ressalva.** O SEI 5 mantém **CKEditor 4 e CKEditor 5**, escolhidos por documento (`documento.sta_editor`) ou por unidade (parâmetro `SEI_NOVO_EDITOR_UNIDADES`). Onde o CK4 estiver em uso, as funcionalidades de editor tendem a funcionar como no SEI 4. Onde o CK5 estiver ativo, **não funcionam** — a adaptação está prevista e é o maior item em aberto do projeto. Detalhes técnicos em [especificacao-sei5.md](./especificacao-sei5.md).
 
 ---
 

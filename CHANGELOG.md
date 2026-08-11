@@ -6,6 +6,21 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ---
 
+## [1.6.3] — 2026-08-11
+
+Primeira versão validada também em **SEI 4.1** (produção). A 1.6.2 havia sido testada apenas em SEI 5.
+
+### Corrigido
+
+- **Sub-itens do menu lateral desalinhados no SEI 4.1.** Itens sem ícone próprio (Avaliação CPAD, Avaliação Documental, Documentos para Eliminação, Editais de Eliminação, Localizadores) apareciam com o texto deslocado para a direita. O SEI usa `vazio.svg` como espaçador nesses casos, e `setInfraImg()` o envolvia num `<span>` que, dentro da âncora `display:flex`, ocupava largura e empurrava o texto. Medido em produção: **todos** os itens desalinhados tinham o wrapper, **todos** os alinhados não tinham. Bug pré-existente do projeto original — o CSS do Estilo Avançado já escondia esse `<span>`, mas só quando o Estilo Avançado estava ligado.
+
+### Alterado
+
+- **Os blocos do painel lateral da árvore agora nascem recolhidos.** São 11 blocos (Especificação, Anotações, Atribuição, Marcador, Acompanhamento Especial, Tipo de Processo, Nível de Acesso, Bloco Interno, Interessados, Assuntos, Observações e Atividades). Antes o painel abria inteiramente expandido, ocupando toda a lateral. A preferência de quem já recolheu ou expandiu continua sendo respeitada.
+- Documentação preparada para uso público: instruções de instalação passo a passo para Chromium e Firefox, orientação para atualizar, aviso sobre conflito com a extensão original, e matriz de compatibilidade indicando explicitamente **o que foi testado** e o que permanece não verificado.
+
+---
+
 ## [1.6.2] — 2026-08-11
 
 Primeira versão do fork comunitário. Foco em compatibilidade com o **SEI 5**, com todas as correções validadas em instância real (SEI 5.0.0 local e SEI 5.0.3 de homologação).
@@ -79,5 +94,6 @@ Versão com tag de release disponível no projeto original.
 
 ---
 
-[Não lançado]: https://github.com/rafaelfariasbsb/sei-pro/compare/v1.6.2...HEAD
+[Não lançado]: https://github.com/rafaelfariasbsb/sei-pro/compare/v1.6.3...HEAD
+[1.6.3]: https://github.com/rafaelfariasbsb/sei-pro/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/rafaelfariasbsb/sei-pro/compare/v1.6.1...v1.6.2

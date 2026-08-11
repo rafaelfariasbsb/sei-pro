@@ -816,7 +816,13 @@ function selectFilterTableHome() {
 }
 function initDadosProcesso(TimeOut = 9000) {
     if (TimeOut <= 0) { return; }
-    if (typeof getParamsUrlPro !== 'undefined' && typeof getDadosIframeProcessoPro !== 'undefined'  && typeof $("#ifrArvore").contents().find('#topmenu').find(`a[target="${ifrVisualizacao_}"]`).eq(0).attr('href') !== 'undefined' ) { 
+    // O link do processo dentro do #topmenu aponta para "ifrVisualizacao", e nao
+    // para ifrVisualizacao_ (que vale "ifrConteudoVisualizacao" desde o SEI 4.1).
+    // No SEI 5 isso fazia a condicao nunca ser satisfeita: a funcao reagendava a
+    // si mesma ate esgotar o TimeOut e desistia em silencio, sem criar o iframe
+    // #frmCheckerProcessoPro — logo propProcesso ficava vazio e a capa do
+    // processo nunca era montada. Aceita os dois targets.
+    if (typeof getParamsUrlPro !== 'undefined' && typeof getDadosIframeProcessoPro !== 'undefined'  && typeof $("#ifrArvore").contents().find('#topmenu').find(`a[target="${ifrVisualizacao_}"], a[target="ifrVisualizacao"]`).eq(0).attr('href') !== 'undefined' ) {
         var id_procedimento = getParamsUrlPro(window.location.href).id_procedimento;
             id_procedimento = (typeof id_procedimento === 'undefined') ? getParamsUrlPro($('#ifrArvore').attr('src')).id_procedimento : id_procedimento;
             id_procedimento = (typeof id_procedimento === 'undefined') ? getParamsUrlPro(window.location.href).id_protocolo : id_procedimento;

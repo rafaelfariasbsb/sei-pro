@@ -7141,8 +7141,14 @@ function ajaxDadosProcessoPro(href, mode, arrayAcompEsp) {
         if (mode == 'editor' || mode == 'gantt' || mode == 'projeto' || mode == 'dados' || mode == 'processo') { 
             checkDadosIframeDocumentosPro(mode);
         }
-        if (mode == 'processo') { 
+        if (mode == 'processo') {
             setTimeout(function(){ resizeArvoreMaxWidth() }, 500);
+            // A capa do processo depende de propProcesso, que so existe a partir
+            // daqui. As chamadas feitas no load dos iframes (sei-pro-arvore.js e
+            // sei-pro-visualizacao.js) rodam ANTES da coleta terminar, reprovam na
+            // guarda e saem em silencio — e a retentativa interna (if (loop)) so
+            // existe dentro do bloco de sucesso, entao nunca havia nova chance.
+            if (typeof setCapaProcesso === 'function') setCapaProcesso();
         }
     }).fail(function(data){
         console.log(dadosProcessoPro.propProcesso, 'Erro ao acessar dadosProcessoPro.propProcesso');

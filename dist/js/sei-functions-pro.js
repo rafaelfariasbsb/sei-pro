@@ -53,10 +53,14 @@ var $ifrArvoreHtml = '#'+ifrArvoreHtml_;
 var dialogIsDraggable = false;
 var tableHomeTimeout = 3000;
 var URL_SPRO = (typeof parent._P !== 'undefined' && parent._P() !== null && typeof parent._P().URL_SPRO !== 'undefined' && parent._P().URL_SPRO !== null) ? parent._P().URL_SPRO : undefined;
-var NAMESPACE_SPRO = (typeof parent._P !== 'undefined' && typeof parent._P().NAMESPACE_SPRO !== 'undefined') ? parent._P().NAMESPACE_SPRO : undefined;
-var URLPAGES_SPRO = (typeof parent._P !== 'undefined' && typeof parent._P().URLPAGES_SPRO !== 'undefined') ? parent._P().URLPAGES_SPRO : undefined;
-var VERSION_SPRO = (typeof parent._P !== 'undefined' && typeof parent._P().VERSION_SPRO !== 'undefined') ? parent._P().VERSION_SPRO : undefined;
-var ICON_SPRO = (typeof parent._P !== 'undefined' && typeof parent._P().ICON_SPRO !== 'undefined') ? parent._P().ICON_SPRO : undefined;
+// parent._P() pode retornar null. A linha do URL_SPRO acima ja trata isso, mas
+// as quatro abaixo nao tratavam e lancavam "Cannot read properties of null".
+// Como isto esta no escopo do modulo, o erro abortava o arquivo INTEIRO.
+var _P_SPRO = (typeof parent._P !== 'undefined') ? parent._P() : null;
+var NAMESPACE_SPRO = (_P_SPRO !== null && typeof _P_SPRO.NAMESPACE_SPRO !== 'undefined') ? _P_SPRO.NAMESPACE_SPRO : undefined;
+var URLPAGES_SPRO = (_P_SPRO !== null && typeof _P_SPRO.URLPAGES_SPRO !== 'undefined') ? _P_SPRO.URLPAGES_SPRO : undefined;
+var VERSION_SPRO = (_P_SPRO !== null && typeof _P_SPRO.VERSION_SPRO !== 'undefined') ? _P_SPRO.VERSION_SPRO : undefined;
+var ICON_SPRO = (_P_SPRO !== null && typeof _P_SPRO.ICON_SPRO !== 'undefined') ? _P_SPRO.ICON_SPRO : undefined;
 var urlTxtPadrao = $(mainMenu+' a[href*="acao=texto_padrao_interno_listar"]').attr('href');
 
 var iconsFlashMenu = [

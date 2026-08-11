@@ -1212,10 +1212,10 @@ function orderDivPanel(html, idOrder, name) {
 }
 function insertDivPanelControleProc() {
     var elementControleProc = isNewSEI ? 'collapseTabelaProcesso' : 'frmProcedimentoControlar';
-    // No SEI 5 o #divFiltro e uma row do Bootstrap (display:flex). Forcar
-    // 'initial' computa como block e empilha os filtros. String vazia remove o
-    // display inline e deixa a classe .row valer. Ver docs/seletores-sei.md
-    var statusView = ( getOptionsPro(elementControleProc) == 'hide' ) ? 'none' : ( isSEI_5 ? '' : 'initial' );
+    // Elementos com a classe .row (Bootstrap) dependem de display:flex. Forcar
+    // um valor os quebra: no SEI 5 o #divFiltro e uma row, e 'initial' computava
+    // como block, empilhando os links de filtro. Ver docs/seletores-sei.md
+    var statusHide = ( getOptionsPro(elementControleProc) == 'hide' );
     var statusIconShow = ( getOptionsPro(elementControleProc) == 'hide' ) ? '' : 'display:none;';
     var statusIconHide = ( getOptionsPro(elementControleProc) == 'hide' ) ? 'display:none;' : '';
     var idControleProc = isNewSEI ? '.'+elementControleProc : '#'+elementControleProc;
@@ -1229,7 +1229,10 @@ function insertDivPanelControleProc() {
 
     if ($('.controleProcPro').length == 0) {
         $('#divInfraBarraLocalizacao').css('width', '100%').addClass('titlePanelHome').append(htmlToggleTable).prepend(htmlIconTable);
-        $(idControleProc).css({'width': '100%', 'display': statusView});
+        $(idControleProc).css('width', '100%').each(function () {
+            // '' remove o display inline e devolve o controle ao CSS (flex nas rows)
+            $(this).css('display', statusHide ? 'none' : ($(this).hasClass('row') ? '' : 'initial'));
+        });
         $('#panelHomePro').prepend(htmlDivPanel);
         $('#frmProcedimentoControlar').moveTo('#processosSEIPro');
         $('#divInfraBarraLocalizacao').moveTo('#processosSEIPro');

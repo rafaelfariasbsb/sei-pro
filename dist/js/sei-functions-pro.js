@@ -6184,8 +6184,11 @@ function toggleTablePro(idTable, mode) {
 		$('#'+elemTable+'_showIcon').show();
         setOptionsPro(elemTable, 'hide');
 	} else {
-		// SEI 5: 'inline-table' quebra a row do Bootstrap (ver insertDivPanelControleProc)
-		$(idTable).removeClass('displayNone').css('display', isSEI_5 ? '' : 'inline-table');
+		// Rows do Bootstrap dependem de display:flex; 'inline-table' as quebra.
+		// '' remove o display inline e devolve o controle ao CSS.
+		$(idTable).removeClass('displayNone').each(function () {
+			$(this).css('display', $(this).hasClass('row') ? '' : 'inline-table');
+		});
 		$('#'+elemTable+'_hideIcon').show();
 		$('#'+elemTable+'_showIcon').hide();
         setOptionsPro(elemTable, 'show');

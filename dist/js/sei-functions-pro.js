@@ -7149,6 +7149,14 @@ function ajaxDadosProcessoPro(href, mode, arrayAcompEsp) {
             // guarda e saem em silencio — e a retentativa interna (if (loop)) so
             // existe dentro do bloco de sucesso, entao nunca havia nova chance.
             if (typeof setCapaProcesso === 'function') setCapaProcesso();
+            // Mesmo motivo para o painel lateral da arvore (Especificacao,
+            // Anotacoes, Atribuicao, Marcador, Acompanhamento Especial):
+            // initDadosProcessoArvore() so tenta por 5s (TimeOut 1000, de 500ms
+            // em 500ms) e desiste em silencio — bem antes de a coleta terminar.
+            var ifrArvoreElem = $('#ifrArvore')[0];
+            if (ifrArvoreElem && ifrArvoreElem.contentWindow && typeof ifrArvoreElem.contentWindow.setDadosProcessoArvore === 'function') {
+                ifrArvoreElem.contentWindow.setDadosProcessoArvore();
+            }
         }
     }).fail(function(data){
         console.log(dadosProcessoPro.propProcesso, 'Erro ao acessar dadosProcessoPro.propProcesso');

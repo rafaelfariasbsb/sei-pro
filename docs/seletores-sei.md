@@ -371,7 +371,7 @@ Confirmada a migração GIF → SVG, mas **os ícones continuam sendo `<img src>
 
 ### Validação cruzada 5.0.0 × 5.0.3
 
-O mapeamento foi reconferido contra o fonte do **SEI 5.0.3** (Infra 2.41.1) — obtido de uma instalação em ambiente de homologação.
+O mapeamento foi reconferido contra o fonte do **SEI 5.0.3** (Infra 2.41.1), obtido de uma instalação em ambiente de homologação.
 
 **Todas as âncoras se mantêm.** Duas observações que valem como regra de projeto:
 

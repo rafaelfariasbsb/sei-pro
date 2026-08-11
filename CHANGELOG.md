@@ -38,7 +38,7 @@ Três bugs **independentes** produziam o mesmo sintoma: o painel de dados do pro
 
 - **Links de filtro empilhados no Controle de Processos.** O `#divFiltro` virou uma `row` do Bootstrap; forçar `display: initial` (que computa como `block`) ou `inline-table` destruía o layout flex. A decisão passou a ser tomada **pela classe `.row` do próprio elemento**, não por detecção de versão — a primeira tentativa dependia de `isSEI_5` e o bug reaparecia de forma intermitente.
 - **Setas do menu lateral desalinhadas.** `setInfraImg()` envolvia a seta num `<span>`, criando um quarto item flex de ~125px que roubava o espaço do texto (317px → 209px).
-- **`siglaUnidadeAtual` duplicada** (ex.: `"ABCABC"`). O `InfraPaginaEsquema3` renderiza a barra do sistema duas vezes, duplicando o ID `#lnkInfraUnidade`.
+- **`siglaUnidadeAtual` duplicada** — a sigla da unidade vinha repetida (ex.: `"ABCABC"` em vez de `"ABC"`). O `InfraPaginaEsquema3` renderiza a barra do sistema duas vezes, duplicando o ID `#lnkInfraUnidade`.
 - **`width: 50%` indevido no `#divFiltro`.**
 
 ### Corrigido — Carregamento de scripts

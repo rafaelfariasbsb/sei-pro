@@ -140,6 +140,8 @@ refactor: centraliza seletores SEI em objeto de configuração
 
 Ao usar um seletor específico do SEI, registre-o em [`docs/seletores-sei.md`](./docs/seletores-sei.md) com a versão correspondente.
 
+Para o padrão completo de nomenclatura, estrutura de módulos e convenções JS do projeto, consulte [`docs/padroes-codigo.md`](./docs/padroes-codigo.md). O índice completo da documentação técnica está em [`docs/README.md`](./docs/README.md).
+
 ---
 
 ## Reportando bugs

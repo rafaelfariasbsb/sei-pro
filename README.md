@@ -10,6 +10,8 @@
 | SEI 4.0 / 4.1 | ✅ Compatível |
 | SEI 5.x | 🔧 Em adaptação |
 
+> Detalhes por funcionalidade e navegador: [Matriz de Compatibilidade](./docs/matriz-compatibilidade.md)
+
 ## Como instalar
 
 ### Instalação manual (todas as versões do SEI)
@@ -113,15 +115,62 @@ Abra uma [issue](https://github.com/rafaelfariasbsb/sei-pro/issues) informando:
 - Navegador e versão
 - Descrição do problema e passos para reproduzir
 
+## Documentação Técnica
+
+A pasta [`docs/`](./docs/) contém toda a documentação de engenharia de software e análise de sistema do projeto.
+
+**Engenharia de Software**
+
+| Documento | Descrição |
+|---|---|
+| [Especificação de Requisitos](./docs/requisitos.md) | Requisitos funcionais e não-funcionais por módulo |
+| [Casos de Uso](./docs/casos-de-uso.md) | Fluxos principais e exceções dos casos de uso |
+| [Plano de Testes](./docs/plano-testes.md) | Estratégia de testes e critérios de release |
+| [Gestão de Riscos](./docs/gestao-riscos.md) | Registro de riscos e planos de mitigação |
+
+**Análise de Sistema**
+
+| Documento | Descrição |
+|---|---|
+| [Arquitetura](./docs/arquitetura.md) | Componentes, contextos de injeção e fluxo de inicialização |
+| [Modelo de Domínio](./docs/modelo-dominio.md) | Entidades, dicionário de dados e regras de negócio |
+| [Diagramas](./docs/diagramas.md) | Diagramas de componentes, sequência, estados e fluxo de dados |
+| [Seletores DOM do SEI](./docs/seletores-sei.md) | Seletores por versão do SEI (referência para SEI 5) |
+| [Matriz de Compatibilidade](./docs/matriz-compatibilidade.md) | Status de cada funcionalidade por versão e navegador |
+
+**Módulos**
+
+| Documento | Módulo |
+|---|---|
+| [Visão geral dos módulos](./docs/modulos/README.md) | Índice e contextos de injeção |
+| [sei-functions-pro](./docs/modulos/sei-functions-pro.md) | Núcleo compartilhado |
+| [sei-pro](./docs/modulos/sei-pro.md) | Página principal — lista de processos |
+| [sei-pro-editor](./docs/modulos/sei-pro-editor.md) | Editor de documentos |
+| [sei-pro-arvore](./docs/modulos/sei-pro-arvore.md) | Árvore do processo |
+| [sei-pro-atividades](./docs/modulos/sei-pro-atividades.md) | Controle de prazos |
+| [sei-pro-ai](./docs/modulos/sei-pro-ai.md) | Integração com IA / ChatGPT |
+
+**Planejamento e Referência**
+
+| Documento | Descrição |
+|---|---|
+| [Roadmap](./docs/roadmap.md) | Fases do projeto, entregas e critérios de versão |
+| [Especificação SEI 5](./docs/especificacao-sei5.md) | O que mudou no SEI 5 e plano de adaptação por módulo |
+| [Padrões de Código](./docs/padroes-codigo.md) | Convenções e boas práticas do projeto |
+| [Glossário](./docs/glossario.md) | Termos do domínio SEI e termos técnicos da extensão |
+| [Guia de Desenvolvimento](./docs/desenvolvimento.md) | Como montar o ambiente, depurar e adicionar funcionalidades |
+
+**Decisões Arquiteturais (ADR)**
+
+| Documento | Decisão |
+|---|---|
+| [ADR-001](./docs/adr/001-sem-build-system.md) | Ausência de sistema de build |
+| [ADR-002](./docs/adr/002-google-sheets-backend.md) | Google Sheets como backend remoto |
+| [ADR-003](./docs/adr/003-estrategia-sei5.md) | Estratégia de compatibilidade com SEI 5 |
+
 ## Como contribuir
 
 Este é um projeto comunitário aberto. Veja o [Guia de Contribuição](./CONTRIBUTING.md) para saber como ajudar — mesmo sem programar.
-
-Documentação técnica disponível em [`docs/`](./docs/):
-- [Arquitetura da extensão](./docs/arquitetura.md)
-- [Guia de desenvolvimento](./docs/desenvolvimento.md)
-- [Registro de seletores DOM do SEI](./docs/seletores-sei.md)
-- [Matriz de compatibilidade](./docs/matriz-compatibilidade.md)
 
 ## SEI Pro no ParticiPEN
 

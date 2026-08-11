@@ -10,14 +10,30 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 Primeira versão do fork comunitário. Foco em compatibilidade com o **SEI 5**, com todas as correções validadas em instância real (SEI 5.0.0 local e SEI 5.0.3 de homologação).
 
-### Corrigido
+### Corrigido — Capa do processo e painel lateral
 
-- **Capa do processo não aparecia no SEI 5.** `init_arvore.js` e `init_visualizacao.js` disparavam `sei-functions-pro.js` e o módulo dependente em dois `$.getScript` paralelos. O módulo menor vencia a corrida e `sei-pro-arvore.js` morria na linha 12 (`isSEI_5 is not defined`), no escopo do módulo — abortando o arquivo inteiro, inclusive a chamada a `parent.setCapaProcesso()`. Agora o carregamento é encadeado.
-- **Links de filtro empilhados no Controle de Processos.** O `#divFiltro` virou uma `row` do Bootstrap no SEI 5; forçar `display: initial` (que computa como `block`) ou `inline-table` destruía o layout flex. Passa-se string vazia, devolvendo o controle ao CSS.
-- **Setas do menu lateral desalinhadas.** `setInfraImg()` envolvia a seta (`/infra_css/imagens/menu_seta.png`) num `<span>`, criando um quarto item flex de ~125px que roubava o espaço do texto. A seta passa a ser excluída do wrapper.
-- **`siglaUnidadeAtual` duplicada** (ex.: `"ABCABC"`). O `InfraPaginaEsquema3` renderiza a barra do sistema duas vezes, duplicando o ID `#lnkInfraUnidade`; `$(sel).text()` concatenava ambos. Adicionado `.first()`.
-- **`Moment Duration Format cannot find Moment.js`.** `moment-duration-format` (4 KB) vencia a corrida contra o `moment` (53 KB). Carregamento encadeado.
-- **`width: 50%` indevido no `#divFiltro`** no SEI 5.
+Três bugs **independentes** produziam o mesmo sintoma: o painel de dados do processo (Histórico de tramitação, QR Code, Data de Autuação, Assuntos, Interessados, Nível de Acesso, Marcador) simplesmente não aparecia. Nenhum deles resolvia sozinho.
+
+- **Corrida de carregamento matava o `sei-pro-arvore.js`.** `init_arvore.js` e `init_visualizacao.js` disparavam `sei-functions-pro.js` e o módulo dependente em dois `$.getScript` paralelos. O módulo menor vencia, e `sei-pro-arvore.js` morria na linha 12 (`isSEI_5 is not defined`) — no escopo do módulo, o que aborta o arquivo **inteiro**, inclusive a chamada a `parent.setCapaProcesso()`.
+- **`target` errado impedia a coleta de iniciar.** `initDadosProcesso()` procurava `a[target="ifrConteudoVisualizacao"]` dentro do `#topmenu`, mas ali o link aponta para `ifrVisualizacao`. Com a condição nunca satisfeita, a função reagendava a si mesma até esgotar o tempo e **desistia em silêncio** — o iframe de coleta nunca era criado.
+- **Ninguém chamava a montagem depois que os dados chegavam.** As chamadas existentes disparam no load dos iframes, antes de a coleta assíncrona terminar; a retentativa interna só existe dentro do bloco de sucesso. Agora a capa e o painel lateral são acionados ao final da coleta.
+- **Painel lateral da árvore** (Especificação, Anotações, Atribuição, Marcador, Acompanhamento Especial): mesma causa — `initDadosProcessoArvore()` só tentava por **5 segundos**, bem menos que a duração da coleta.
+
+### Corrigido — Layout no SEI 5
+
+- **Links de filtro empilhados no Controle de Processos.** O `#divFiltro` virou uma `row` do Bootstrap; forçar `display: initial` (que computa como `block`) ou `inline-table` destruía o layout flex. A decisão passou a ser tomada **pela classe `.row` do próprio elemento**, não por detecção de versão — a primeira tentativa dependia de `isSEI_5` e o bug reaparecia de forma intermitente.
+- **Setas do menu lateral desalinhadas.** `setInfraImg()` envolvia a seta num `<span>`, criando um quarto item flex de ~125px que roubava o espaço do texto (317px → 209px).
+- **`siglaUnidadeAtual` duplicada** (ex.: `"ABCABC"`). O `InfraPaginaEsquema3` renderiza a barra do sistema duas vezes, duplicando o ID `#lnkInfraUnidade`.
+- **`width: 50%` indevido no `#divFiltro`.**
+
+### Corrigido — Carregamento de scripts
+
+Quatro defeitos com a mesma raiz: `$.getScript` é assíncrono e o projeto disparava dependências em paralelo, sem encadear.
+
+- **`checkHostLimit is not defined`.** `initSeiPro()` chamava a função antes de o `sei-functions-pro.js` (~1,2 MB) terminar de carregar; o `ReferenceError` abortava a inicialização.
+- **`$(...).resizable is not a function`** — a barra que redimensiona a árvore parava de funcionar. O `init.js` **recarregava o jQuery**, substituindo a instância à qual o jQuery UI havia se acoplado. O recarregamento era logicamente redundante: a própria linha usava `$.getScript`, então o jQuery já existia.
+- **`Moment Duration Format cannot find Moment.js`.** O plugin (4 KB) vencia a corrida contra o `moment` (53 KB).
+- **`Cannot read properties of null (reading 'NAMESPACE_SPRO')`.** Quatro declarações liam propriedades de `parent._P()` sem verificar nulo — sendo que a linha vizinha já fazia essa verificação. Por estar no escopo do módulo, abortava o arquivo inteiro.
 
 ### Adicionado
 

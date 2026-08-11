@@ -7,8 +7,13 @@ var frmEditor5Exists = $('html script[charset="utf-8"]').last().html().includes(
 $.getScript(getUrlExtension("js/lib/jquery-3.4.1.min.js"));
 $.getScript(getUrlExtension("js/lib/jmespath.min.js"));
 $.getScript(getUrlExtension("js/lib/purify.min.js"));
-$.getScript(getUrlExtension("js/lib/moment.min.js"));
-$.getScript(getUrlExtension("js/lib/moment-duration-format.min.js"));
+// moment-duration-format depende do moment ja estar carregado e lanca
+// "cannot find Moment.js" se executar antes. Como $.getScript e assincrono,
+// disparar os dois em sequencia e uma corrida — e o plugin (4 KB) quase
+// sempre vence o moment (53 KB). Encadear garante a ordem.
+$.getScript(getUrlExtension("js/lib/moment.min.js")).done(function () {
+    $.getScript(getUrlExtension("js/lib/moment-duration-format.min.js"));
+});
 $.getScript(getUrlExtension("js/lib/crypto-js.min.js"));
 $.getScript(getUrlExtension("js/lib/diff2html.min.js"));
 $.getScript(getUrlExtension("js/sei-pro-docs-lote.js"));
